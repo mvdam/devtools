@@ -1,0 +1,16 @@
+{
+  "name": "React App Remove Dev Container",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "NODE_VERSION": "18"
+    }
+  },
+  "forwardPorts": [3000],
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "styled-components.vscode-styled-components",
+    "ms-vscode-remote.remote-containers"
+  ]
+}
