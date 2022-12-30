@@ -1,9 +1,7 @@
 ARG NODE_VERSION="18"
-FROM node:${NODE_VERSION}-alpine
+FROM node:${NODE_VERSION}
 
 WORKDIR /app
-
-RUN apk add --no-cache xclip git
 
 RUN git clone https://github.com/mvdam/devtools.git
 
