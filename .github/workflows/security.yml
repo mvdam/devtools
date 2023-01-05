@@ -1,0 +1,39 @@
+name: Security
+
+on: pull_request
+
+jobs:
+  owasp_dependency_check:
+    runs-on: ubuntu-latest
+    name: OWASP Dependency Check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: NPM install
+        run: npm ci
+      - name: Depcheck
+        uses: dependency-check/Dependency-Check_Action@main
+        id: Depcheck
+        with:
+          project: "test"
+          path: "."
+          format: "HTML"
+          args: >
+            --failOnCVSS 7
+            --enableRetired
+      - name: Upload Test results
+        uses: actions/upload-artifact@master
+        with:
+          name: Depcheck report
+          path: ${{github.workspace}}/reports
+
+  npm_audit:
+    runs-on: ubuntu-latest
+    name: NPM Audit
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: NPM install
+        run: npm ci
+      - name: Audit
+        run: npm audit

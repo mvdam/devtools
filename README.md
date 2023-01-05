@@ -2,6 +2,18 @@
 
 Collection of most-used tools for development
 
-- [bash](./bash/)
+- [/.github](./github)
 
-  Contains bash aliases and helper functions to improve productivity
+  Contains Github action yml's for security and build actions.
+
+- [/bash](./bash/)
+
+  Contains bash aliases and helper functions to improve productivity.
+
+- [/code-snippets](./code-snippets/)
+
+  Contains frequently used code snippets.
+
+- [/docker](./docker/)
+
+  Contains example Dockerfile's for Angular and Next apps.
