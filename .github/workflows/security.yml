@@ -18,9 +18,12 @@ jobs:
           project: "test"
           path: "."
           format: "HTML"
+          # https://jeremylong.github.io/DependencyCheck/dependency-check-cli/arguments.html
           args: >
             --failOnCVSS 7
             --enableRetired
+            --nodeAuditSkipDevDependencies
+            --nodePackageSkipDevDependencies
       - name: Upload Test results
         uses: actions/upload-artifact@master
         with:
@@ -36,4 +39,4 @@ jobs:
       - name: NPM install
         run: npm ci
       - name: Audit
-        run: npm audit
+        run: npm audit --omit=dev
