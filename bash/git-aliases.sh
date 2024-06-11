@@ -26,6 +26,15 @@ function get-branch-name {
     echo "$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)"
 }
 
+# Simple rebase shortcut
+function rebase {
+    branch_name="$(get-branch-name)"
+    git checkout main
+    git pull
+    git checkout ${branch_name}
+    git merge main
+}
+
 # Push current branch to orgin without providing "--set-upstream origin" every time
 function push-origin {
     branch_name="$(get-branch-name)"
