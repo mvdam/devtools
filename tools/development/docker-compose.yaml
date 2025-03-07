@@ -1,21 +1,61 @@
-version: "3.0"
-
 services:
   libretranslate:
-    container_name: libretranslate
     image: libretranslate/libretranslate
-    restart: always
+    container_name: libretranslate
     ports:
-      - "5000:5000"
+      - "5100:5000"
+    restart: unless-stopped
+    networks:
+      - libretranslate
 
   spiderfoot:
+    image: ctdc/spiderfoot
+    container_name: spiderfoot
     volumes:
       - spiderfoot-data:/var/lib/spiderfoot
-    image: dtagdevsec/spiderfoot
-    container_name: spiderfoot
     ports:
-      - "5001:5001"
+      - "5200:5001"
     restart: unless-stopped
+    networks:
+      - spiderfoot
+
+  cyberchef:
+    image: ghcr.io/gchq/cyberchef
+    container_name: cyberchef
+    ports:
+      - "5300:80"
+    restart: unless-stopped
+    networks:
+      - cyberchef
+
+  # Vaultwarden
+  vaultwarden:
+    image: vaultwarden/server:latest
+    networks:
+      - vaultwarden
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      DOMAIN: "https://vault.shinyapps.nl"
+      SIGNUPS_ALLOWED: false
+    volumes:
+      - /opt/homelab/vaultwarden/vw-data/:/data/
+    ports:
+      - 4000:80
 
 volumes:
   spiderfoot-data:
+
+networks:
+  libretranslate:
+    name: libretranslate
+    driver: bridge
+  spiderfoot:
+    name: spiderfoot
+    driver: bridge
+  cyberchef:
+    name: cyberchef
+    driver: bridge
+  vaultwarden:
+    name: vaultwarden
+    driver: bridge

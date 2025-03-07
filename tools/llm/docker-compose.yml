@@ -1,0 +1,53 @@
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: 8
+          memory: 8G
+    security_opt:
+      - no-new-privileges
+    cap_drop:
+      - all
+    cap_add:
+      - SYS_NICE
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    networks:
+      - ollama
+
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: openwebui
+    ports:
+      - "3000:8080"
+    volumes:
+      - open-webui:/app/backend/data
+    depends_on:
+      - ollama
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: 1
+          memory: 1G
+    networks:
+      - ollama
+
+volumes:
+  ollama:
+  open-webui:
+
+networks:
+  ollama:
+    name: ollama
+    driver: bridge
+  # todo: after install the model, we want to use offline to be sure it does not leak anything
+  offline:
+    name: offline
+    driver: none
