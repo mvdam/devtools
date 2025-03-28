@@ -1,5 +1,5 @@
-export ONLINE="true"
-DEFAULT_MODEL="llama3.2:1b"
+export ONLINE=true
+DEFAULT_MODEL="tinydolphin"
 
 # only for podman: setup correct limits
 # podman machine stop
@@ -11,8 +11,7 @@ docker exec -it ollama ollama pull ${DEFAULT_MODEL}
 
 docker compose down
 
-ONLINE="false"
+ONLINE=false
 
 docker compose up -d
 
-# todo: stop ollama and start it again offline

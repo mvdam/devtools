@@ -18,3 +18,18 @@ SpiderFoot automates OSINT for threat intelligence and mapping your attack surfa
 ### [Cyberchef](https://github.com/gchq/CyberChef) - [http://localhost:5300/](http://localhost:5300/)
 
 CyberChef is a simple, intuitive web app for carrying out all manner of "cyber" operations within a web browser. These operations include simple encoding like XOR and Base64, more complex encryption like AES, DES and Blowfish, creating binary and hexdumps, compression and decompression of data, calculating hashes and checksums, IPv6 and X.509 parsing, changing character encodings, and much more.
+
+### [Open WebUI](https://openwebui.com/) - [http://localhost:9000/](http://localhost:9000/)
+
+Open WebUI is an extensible, self-hosted AI interface that adapts to your workflow, all while operating entirely offline.
+
+## Draft
+
+```
+host.docker.internal:11434
+```
+
+## Article
+
+Setup offline ollama
+Connect to vscode

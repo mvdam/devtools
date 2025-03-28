@@ -52,7 +52,7 @@ networks:
   offline_network:
     driver: bridge
     driver_opts:
-      com.docker.network.bridge.enable_ip_masquerade: ${ONLINE}
+      com.docker.network.bridge.enable_ip_masquerade: "${ONLINE}"
     ipam:
       driver: default
       config:

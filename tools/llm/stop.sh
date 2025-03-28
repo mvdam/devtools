@@ -1,2 +1,2 @@
-export OFFLINE=true
+export ONLINE=false
 docker compose down

@@ -28,23 +28,20 @@ services:
     networks:
       - cyberchef
 
-  # Vaultwarden
-  vaultwarden:
-    image: vaultwarden/server:latest
-    networks:
-      - vaultwarden
-    container_name: vaultwarden
-    restart: unless-stopped
-    environment:
-      DOMAIN: "https://vault.shinyapps.nl"
-      SIGNUPS_ALLOWED: false
-    volumes:
-      - /opt/homelab/vaultwarden/vw-data/:/data/
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: openwebui
     ports:
-      - 4000:80
+      - "9000:8080"
+    volumes:
+      - open-webui:/app/backend/data
+    restart: unless-stopped
+    networks:
+      - openwebui
 
 volumes:
   spiderfoot-data:
+  open-webui:
 
 networks:
   libretranslate:
@@ -56,6 +53,6 @@ networks:
   cyberchef:
     name: cyberchef
     driver: bridge
-  vaultwarden:
-    name: vaultwarden
+  openwebui:
+    name: openwebui
     driver: bridge
