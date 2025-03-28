@@ -35,3 +35,5 @@ podman machine start
 TODO:
 check if we can increase CPU count
 https://www.cpu-monkey.com/en/cpu-apple_m1_pro_10_cpu_16_gpu
+
+https://stackoverflow.com/a/69546359

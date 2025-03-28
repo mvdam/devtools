@@ -6,8 +6,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: 8
-          memory: 8G
+          cpus: "8"
+          memory: "8G"
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -19,7 +19,8 @@ services:
     volumes:
       - ollama:/root/.ollama
     networks:
-      - ollama
+      - openwebui
+      - offline_network
 
   openwebui:
     image: ghcr.io/open-webui/open-webui:main
@@ -34,20 +35,25 @@ services:
     deploy:
       resources:
         limits:
-          cpus: 1
-          memory: 1G
+          cpus: "1"
+          memory: "1G"
     networks:
-      - ollama
+      - openwebui
 
 volumes:
   ollama:
   open-webui:
 
 networks:
-  ollama:
-    name: ollama
+  openwebui:
+    name: openwebui
     driver: bridge
-  # todo: after install the model, we want to use offline to be sure it does not leak anything
-  offline:
-    name: offline
-    driver: none
+
+  offline_network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: ${ONLINE}
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
