@@ -1,17 +1,18 @@
 export ONLINE=true
-DEFAULT_MODEL="tinydolphin"
+DEFAULT_MODEL="llama3.2:3b"
 
 # only for podman: setup correct limits
-# podman machine stop
-# podman machine set --cpus 8 --memory 8192
-# podman machine start
+podman machine stop
 
-docker compose up -d
+
+
+
+docker-compose up -d
 docker exec -it ollama ollama pull ${DEFAULT_MODEL}
 
-docker compose down
+# podman compose down
 
-ONLINE=false
+# ONLINE=false
 
-docker compose up -d
+# podman compose up -d
 

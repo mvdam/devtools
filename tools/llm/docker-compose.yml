@@ -26,9 +26,9 @@ services:
     image: ghcr.io/open-webui/open-webui:main
     container_name: openwebui
     ports:
-      - "3000:8080"
+      - "3333:8080"
     volumes:
-      - open-webui:/app/backend/data
+      - open-webui-podman:/app/backend/data
     depends_on:
       - ollama
     restart: unless-stopped
@@ -42,7 +42,7 @@ services:
 
 volumes:
   ollama:
-  open-webui:
+  open-webui-podman:
 
 networks:
   openwebui:
@@ -51,8 +51,8 @@ networks:
 
   offline_network:
     driver: bridge
-    driver_opts:
-      com.docker.network.bridge.enable_ip_masquerade: "${ONLINE}"
+    # driver_opts:
+    #   com.docker.network.bridge.enable_ip_masquerade: "${ONLINE}"
     ipam:
       driver: default
       config:

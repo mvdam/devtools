@@ -10,8 +10,10 @@ http://localhost:3000
 
 ### Run the stack
 
+Make sure Docker is running.
+
 ```
-podman compose up -d
+./start.sh
 ```
 
 ## Tips & Tricks

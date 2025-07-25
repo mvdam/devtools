@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: joplin
+  name: joplin-pod
+spec:
+  containers:
+    - name: joplin-db
+      image: postgres:16
+      env:
+        - name: POSTGRES_PASSWORD
+          value: ${POSTGRES_PASSWORD}
+        - name: POSTGRES_USER
+          value: ${POSTGRES_USER}
+        - name: POSTGRES_DB
+          value: ${POSTGRES_DB}
+
+    - name: joplin-server
+      image: joplin/server:latest
+      env:
+        - name: APP_PORT
+          value: ${JOPLIN_SERVER_PORT}
+        - name: APP_BASE_URL
+          value: ${JOPLIN_SERVER_BASE_URL}
+        - name: DB_CLIENT
+          value: ${JOPLIN_SERVER_DB_CLIENT}
+        - name: POSTGRES_PASSWORD
+          value: ${POSTGRES_PASSWORD}
+        - name: POSTGRES_DATABASE
+          value: ${POSTGRES_DB}
+        - name: POSTGRES_USER
+          value: ${POSTGRES_USER}
+        - name: POSTGRES_PORT
+          value: ${POSTGRES_PORT}
+        - name: POSTGRES_HOST
+          value: joplin-db
+      ports:
+        - containerPort: ${JOPLIN_SERVER_PORT}
+          hostPort: ${JOPLIN_SERVER_HOST_PORT}
+          protocol: TCP

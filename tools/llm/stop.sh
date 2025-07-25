@@ -1,2 +1,2 @@
 export ONLINE=false
-docker compose down
+podman compose down
